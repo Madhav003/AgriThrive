@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+h1, h2 {
+    color: #0056b3;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background: #28a745;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+#loading {
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    box-shadow: 0 0 10px #ddd;
+    overflow: auto;          /* Ensure scrollable content */
+    max-height: 400px;       /* Limit height with scroll */
+    white-space: normal;     /* Enable text wrapping */
+    word-wrap: break-word;   /* Break long words */
+    line-height: 1.5;
+}
+
+pre {
+    white-space: pre-wrap;   /* Wrap long lines */
+    word-wrap: break-word;   /* Break words properly */
+}
+
+.rich-text {
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+.rich-text strong {
+    font-weight: bold;
+    color: #d35400; /* Styled bold */
+}
+
+.rich-text em {
+    font-style: italic;
+    color: #2980b9; /* Styled italic */
+}
+
+.rich-text ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.rich-text li {
+    margin: 5px 0;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 Soil Analysis</h1>
+
+        <form id="soil-form" method="POST">
+            <label for="record">Enter Soil Record Name:</label>
+            <input type="text" id="record" name="record" required>
+            <button type="submit">Analyze</button>
+        </form>
+
+        <div id="loading" style="display: none;">⏳ Analyzing...</div>
+
+        <div id="result" style="display: none;">
+            <h2>🌍 Analysis Result:</h2>
+            <div id="output" class="rich-text"></div>  <!-- Rich text output -->
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('soil-form');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                loading.style.display = 'none';
+                result.style.display = 'block';
+
+                if (data.error) {
+                    output.innerHTML = `<p style="color: red;">⚠️ ${data.error}</p>`;
+                } else {
+                    output.innerHTML = formatRichText(data.result);
+                }
+
+            } catch (error) {
+                loading.style.display = 'none';
+                output.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        });
+
+        // 🔹 Function to format rich text
+        function formatRichText(text) {
+            // Bold
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // Italic
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+            // Bullet points
+            text = text.replace(/- (.*?)\n/g, '<li>$1</li>');
+            text = text.replace(/<li>(.*?)<\/li>/g, '<ul>$1</ul>');
+
+            // Newlines
+            text = text.replace(/\n/g, '<br>');
+
+            return text;
+        }
+    </script>
+</body>
+</html>
